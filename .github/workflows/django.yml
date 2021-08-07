@@ -29,8 +29,7 @@ jobs:
       run: |
         sudo systemctl start postgresql.service
         pg_isready
-        sudo -u postgres psql --command="CREATE USER mmarcus PASSWORD 'secret'" --command="\du"
-        sudo -u postgres createdb --owner=mmarcus mysite
+        sudo -u postgres psql --command="CREATE USER mmarcus PASSWORD 'secret'" --command="ALTER USER mmarcus CREATEDB" --command="\du"
         PGPASSWORD=secret psql --username=mmarcus --host=localhost --list mysite
     - name: Run Tests
       run: |
